@@ -1,0 +1,27 @@
+Aufruf: exo-open [Adressen …]
+        exo-open --launch TYP [PARAMETER …]
+
+  -?, --help                          Diesen Hilfetext anzeigen und beenden
+  -V, --version                       Programmversion anzeigen und beenden
+
+  --launch TYP [PARAMETER …]         Die bevorzugte Anwendung für den TYP
+                                      mit den optionalen PARAMETERn starten,
+                                      wobei TYP einen der folgenden Werte
+                                      annehmen kann.
+
+  --working-directory VERZEICHNIS     Arbeitsverzeichnis für Anwendungen, die
+                                      mit --launch gestartet werden.
+
+Die folgenden TYPen für --launch werden derzeit unterstützt:
+
+WebBrowser - Der bevorzugte Internetbrowser.
+MailReader - Das bevorzugte E-Mail-Programm.
+FileManager - Die bevorzugte Dateiverwaltung.
+TerminalEmulator - Das bevorzugte Terminal.
+
+Falls Sie die --launch-Option nicht angeben, wird exo-open alle angegebenen
+Adressen mit Ihrem bevorzugten Programm öffnen. Ansonsten können Sie auswählen,
+welche bevorzugte Anwendung Sie starten wollen, und können dieser dann
+zusätzliche Parameter übergeben (z.B. kann man bei TerminalEmulator den
+Befehl angeben, der im Terminal ausgeführt werden soll).
+

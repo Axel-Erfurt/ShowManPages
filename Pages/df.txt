@@ -1,0 +1,49 @@
+Aufruf: df [OPTION]... [DATEI]...
+Anzeige von Informationen über die Dateisysteme, auf dem sich jede
+DATEI befindet, oder alle Dateisysteme, welches der Normalfall ist.
+
+Erforderliche Argumente für lange Optionen sind auch für kurze erforderlich.
+  -a, --all                 unechte Dateisysteme mit einschließen
+  -B, --block-size=GRÖßE    Größen in Einheiten von GRÖßE ausgeben, z.B. werden
+                              bei „-BM“ die Grössen in Einheiten von 1.048.576
+                              Bytes ausgegeben. Siehe auch GRÖẞE weiter unten
+  -h, --human-readable      Größen in menschenlesbarem Format (z.B. 1K 234M 2G)
+  -H, --si                  genauso, aber mit 1000 statt 1024 als Teiler (z.B 1.1G)
+  -i, --inodes              INode‐Information statt der Block‐Benutzung
+                              auflisten
+  -k                        wie „--block-size=1K“
+  -l, --local               Liste auf lokale Dateisysteme begrenzen
+      --no-sync             nicht „sync“ vor Erlangen der Benutzungsinformation
+                              aufrufen (Standardvorgabe)
+      --output[=FELDLISTE]  Das durch FELDLISTE definierte Ausgabeformat
+                              verwenden, oder alle Felder ausgeben, wenn
+                              FELDLISTE nicht angegeben wird.
+  -P, --portability         POSIX‐Ausgabeformat verwenden
+      --sync                „sync“ vor Erlangen der Benutzungsinformation
+                              aufrufen
+      --total               Gesamtsumme erstellen
+  -t, --type=TYP            Liste auf Dateisysteme des Typs TYP begrenzen
+  -T, --print-type          Dateisystemtyp ausgeben.
+  -x, --exclude-type=TYP    Liste auf Dateisysteme nicht vom Typ TYP begrenzen.
+  -v                        (ignoriert)
+      --help     diese Hilfe anzeigen und beenden
+      --version  Versionsinformation anzeigen und beenden
+
+Werte werden in der ersten verfügbaren GRÖßE von --block-size und der
+Umgebungsvariablen DF_BLOCK_SIZE, BLOCK_SIZE und BLOCKSIZE ausgegeben.
+Andernfalls ist die Vorgabe Einheiten von 1024 Bytes 	(oder 512 wenn
+POSIXLY_CORRECT gesetzt wurde).
+
+GRÖẞE ist eine Ganzzahl und eine optionale Einheit (Beispiel: 10M sind
+10*1024*1024). Einheiten sind K, M, G, T, P, E, Z, Y (Potenzen von 1024) oder
+KB, MB, ... (Potenzen von 1000).
+
+FELDLISTE ist eine durch Komma getrennte Liste der zu verwendenden Spalten.
+Gültige Feldnamen sind: „source“, „fstype“, „itotal“, „iused“, „iavail“,
+„ipcent“, „size“, „used“, „avail“, „pcent“, „file“ und „target“ (siehe
+Infoseite).
+
+GNU coreutils Onlinehilfe: <http://www.gnu.org/software/coreutils/>
+Melden Sie Übersetzungsfehler für df an <translation-team-de@lists.sourceforge.net>
+Die vollständige Dokumentation ist hier: <http://www.gnu.org/software/coreutils/df>
+oder auch lokal mittels „info '(coreutils) df invocation'“

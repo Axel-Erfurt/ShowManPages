@@ -1,0 +1,684 @@
+usage: livestreamer [OPTIONS] <URL> [STREAM]
+
+Streamlink is command-line utility that extracts streams from
+various services and pipes them into a video player of choice.
+
+Positional arguments:
+  URL
+    A URL to attempt to extract streams from.
+    
+    Usually, the protocol of http(s) URLs can be omitted ("https://"),
+    depending on the implementation of the plugin being used.
+    
+    Alternatively, the URL can also be specified by using the --url option.
+    
+  STREAM
+    Stream to play.
+    
+    Use "best" or "worst" for selecting the highest or lowest available quality.
+    
+    Fallback streams can be specified by using a comma-separated list:
+    
+      "720p,480p,best"
+    
+    If no stream is specified and --default-stream is not used, then a
+    list of available streams will be printed.
+    
+
+General options:
+  -h, --help
+    Show this help message and exit.
+    
+  -V, --version
+    Show version number and exit.
+    
+  --plugins
+    Print a list of all currently installed plugins.
+    
+  --can-handle-url URL
+    Check if Streamlink has a plugin that can handle the specified URL.
+    
+    Returns status code 1 for false and 0 for true.
+    
+    Useful for external scripting.
+    
+  --can-handle-url-no-redirect URL
+    Same as --can-handle-url but without following redirects
+    when looking up the URL.
+    
+  --config FILENAME
+    Load options from this config file.
+    
+    Can be repeated to load multiple files, in which case
+    the options are merged on top of each other where the
+    last config has highest priority.
+    
+  -l LEVEL, --loglevel LEVEL
+    Set the log message threshold.
+    
+    Valid levels are: none, error, warning, info, debug
+    
+  -Q, --quiet
+    Hide all log output.
+    
+    Alias for "--loglevel none".
+    
+  -j, --json
+    Output JSON representations instead of the normal text output.
+    
+    Useful for external scripting.
+    
+  --auto-version-check {yes,true,1,on,no,false,0,off}
+    Unused, kept for compatibility reasons.
+    
+    Default is "no".
+    
+  --version-check
+    Runs a version check and exits.
+    
+  --locale LOCALE
+    The preferred locale setting, for selecting the preferred
+    subtitle and audio language.
+    
+    The locale is formatted as [language_code]_[country_code],
+    eg. en_US or es_ES.
+    
+    Default is system locale.
+    
+
+Player options:
+  -p COMMAND, --player COMMAND
+    Player to feed stream data to. By default, VLC will be used
+    if it can be found in its default location.
+    
+    This is a shell-like syntax to support using a specific player:
+    
+      streamlink --player=vlc <url> <quality>
+    
+    Absolute or relative paths can also be passed via this option
+    in the event the player's executable can not be resolved:
+    
+      streamlink --player=/path/to/vlc <url> <quality>
+      streamlink --player=./vlc-player/vlc <url> <quality>
+    
+    To use a player that is located in a path with spaces you must
+    quote the parameter or its value:
+    
+      streamlink "--player=/path/with spaces/vlc" <url> <quality>
+      streamlink --player "C:\path\with spaces\mpc-hc64.exe" <url> <quality>
+    
+    Options may also be passed to the player. For example:
+    
+      streamlink --player "vlc --file-caching=5000" <url> <quality>
+    
+    As an alternative to this, see the --player-args parameter,
+    which does not log any custom player arguments.
+    
+  -a ARGUMENTS, --player-args ARGUMENTS
+    This option allows you to customize the default arguments which
+    are put together with the value of --player to create a command
+    to execute. Unlike the --player parameter, custom player
+    arguments will not be logged.
+    
+    This value can contain formatting variables surrounded by curly
+    braces, { and }. If you need to include a brace character, it
+    can be escaped by doubling, e.g. {{ and }}.
+    
+    Formatting variables available:
+    
+    filename
+      This is the filename that the player will use.
+      It's usually "-" (stdin), but can also be a URL or a file
+      depending on the options used.
+    
+    It's usually enough to use --player instead of this unless you
+    need to add arguments after the filename.
+    
+    Default is "{filename}".
+    
+    Example:
+    
+      streamlink -p vlc -a "--play-and-exit {filename}" <url> <quality>
+    
+  -v, --verbose-player
+    Allow the player to display its console output.
+    
+  -n, --player-fifo, --fifo
+    Make the player read the stream through a named pipe instead of
+    the stdin pipe.
+    
+  --player-http
+    Make the player read the stream through HTTP instead of
+    the stdin pipe.
+    
+  --player-continuous-http
+    Make the player read the stream through HTTP, but unlike
+    --player-http it will continuously try to open the stream if the
+    player requests it.
+    
+    This makes it possible to handle stream disconnects if your player
+    is capable of reconnecting to a HTTP stream. This is usually
+    done by setting your player to a "repeat mode".
+    
+  --player-external-http
+    Serve stream data through HTTP without running any player. This is useful
+    to allow external devices like smartphones or streaming boxes to watch
+    streams they wouldn't be able to otherwise.
+    
+    Behavior will be similar to the continuous HTTP option, but no player
+    program will be started, and the server will listen on all available
+    connections instead of just in the local (loopback) interface.
+    
+    The URLs that can be used to access the stream will be printed to the
+    console, and the server can be interrupted using CTRL-C.
+    
+  --player-external-http-port PORT
+    A fixed port to use for the external HTTP server if that mode is enabled.
+    Omit or set to 0 to use a random high (>1024) port.
+    
+  --player-passthrough TYPES
+    A comma-delimited list of stream types to pass to the player as a
+    URL to let it handle the transport of the stream instead.
+    
+    Stream types that can be converted into a playable URL are:
+    
+    - hls
+    - http
+    - rtmp
+    
+    Make sure your player can handle the stream type when using this.
+    
+  --player-no-close
+    By default Streamlink will close the player when the stream ends.
+    This is to avoid "dead" GUI players lingering after a stream ends.
+    
+    It does however have the side-effect of sometimes closing a player
+    before it has played back all of its cached data.
+    
+    This option will instead let the player decide when to exit.
+    
+
+File output options:
+  -o FILENAME, --output FILENAME
+    Write stream data to FILENAME instead of playing it.
+    
+    You will be prompted if the file already exists.
+    
+  -f, --force
+    When using -o, always write to file even if it already exists.
+    
+  -O, --stdout
+    Write stream data to stdout instead of playing it.
+    
+
+Stream options:
+  --url URL
+    A URL to attempt to extract streams from.
+    
+    Usually, the protocol of http(s) URLs can be omitted (https://),
+    depending on the implementation of the plugin being used.
+    
+    This is an alternative to setting the URL using a positional argument
+    and can be useful if set in a config file.
+    
+  --default-stream STREAM
+    Stream to play.
+    
+    Use "best" or "worst" for selecting the highest or lowest available quality.
+    
+    Fallback streams can be specified by using a comma-separated list:
+    
+      "720p,480p,best"
+    
+    This is an alternative to setting the stream using a positional argument
+    and can be useful if set in a config file.
+    
+  --retry-streams DELAY
+    Will retry fetching streams until streams are found while
+    waiting DELAY (seconds) between each attempt.
+    
+  --retry-open ATTEMPTS
+    Will try ATTEMPTS times to open the stream until giving up.
+    
+    Default is 1.
+    
+  --stream-types TYPES, --stream-priority TYPES
+    A comma-delimited list of stream types to allow.
+    
+    The order will be used to separate streams when there are multiple
+    streams with the same name but different stream types. Any stream type
+    not listed will be omitted from the available streams list.  A ``*``
+    can be used as a wildcard to match any other type of stream,
+    eg. muxed-stream.
+    
+    Default is "rtmp,hls,hds,http,akamaihd,*".
+    
+  --stream-sorting-excludes STREAMS
+    Fine tune best/worst synonyms by excluding unwanted streams.
+    
+    Uses a filter expression in the format:
+    
+      [operator]<value>
+    
+    Valid operators are >, >=, < and <=. If no operator is specified
+    then equality is tested.
+    
+    For example this will exclude streams ranked higher than "480p":
+    
+      ">480p"
+    
+    Multiple filters can be used by separating each expression with
+    a comma.
+    
+    For example this will exclude streams from two quality types:
+    
+      ">480p,>medium"
+    
+
+Stream transport options:
+  --hds-live-edge SECONDS
+    The time live HDS streams will start from the edge of stream.
+    
+    Default is 10.0.
+    
+  --hds-segment-attempts ATTEMPTS
+    How many attempts should be done to download each HDS segment
+    before giving up.
+    
+    Default is 3.
+    
+  --hds-segment-threads THREADS
+    The size of the thread pool used to download HDS segments.
+    Minimum value is 1 and maximum is 10.
+    
+    Default is 1.
+    
+  --hds-segment-timeout TIMEOUT
+    HDS segment connect and read timeout.
+    
+    Default is 10.0.
+    
+  --hds-timeout TIMEOUT
+    Timeout for reading data from HDS streams.
+    
+    Default is 60.0.
+    
+  --hls-live-edge SEGMENTS
+    How many segments from the end to start live HLS streams on.
+    
+    The lower the value the lower latency from the source you will be,
+    but also increases the chance of buffering.
+    
+    Default is 3.
+    
+  --hls-segment-attempts ATTEMPTS
+    How many attempts should be done to download each HLS segment
+    before giving up.
+    
+    Default is 3.
+    
+  --hls-playlist-reload-attempts ATTEMPTS
+    How many attempts should be done to reload the HLS playlist
+    before giving up.
+    
+    Default is 3.
+    
+  --hls-segment-threads THREADS
+    The size of the thread pool used to download HLS segments.
+    Minimum value is 1 and maximum is 10.
+    
+    Default is 1.
+    
+  --hls-segment-timeout TIMEOUT
+    HLS segment connect and read timeout.
+    
+    Default is 10.0.
+    
+  --hls-audio-select CODE
+    Selects a specific audio source, by language code, when multiple audio sources are available.
+    
+    Note: This is only useful in special circumstances where the regular locale option fails.
+    
+  --hls-timeout TIMEOUT
+    Timeout for reading data from HLS streams.
+    
+    Default is 60.0.
+    
+  --hls-start-offset HH:MM:SS
+    Amount of time to skip from the beginning of the stream.
+    For live streams, this is a negative offset from the end of the stream.
+    
+    Default is 00:00:00.
+    
+  --hls-duration HH:MM:SS
+    Limit the playback duration, useful for watching segments of a stream. The actual duration may be slightly
+    longer, as it is rounded to the nearest HLS segment.
+    
+    Has no effect on live streams.
+    
+    Default is unlimited.
+    
+  --hls-live-restart
+    Skip to the beginning of a live stream, or as far back as possible.
+    
+  --http-stream-timeout TIMEOUT
+    Timeout for reading data from HTTP streams.
+    
+    Default is 60.0.
+    
+  --ringbuffer-size SIZE
+    The maximum size of ringbuffer. Add a M or K suffix to specify mega
+    or kilo bytes instead of bytes.
+    
+    The ringbuffer is used as a temporary storage between the stream
+    and the player. This is to allows us to download the stream faster
+    than the player wants to read it.
+    
+    The smaller the size, the higher chance of the player buffering
+    if there are download speed dips and the higher size the more data
+    we can use as a storage to catch up from speed dips.
+    
+    It also allows you to temporary pause as long as the ringbuffer
+    doesn't get full since we continue to download the stream in the
+    background.
+    
+    Note: A smaller size is recommended on lower end systems (such as
+    Raspberry Pi) when playing stream types that require some extra
+    processing (such as HDS) to avoid unnecessary background
+    processing.
+    
+    Default is "16M".
+    
+  --rtmp-proxy PROXY, --rtmpdump-proxy PROXY
+    A SOCKS proxy that RTMP streams will use.
+    
+    Example: 127.0.0.1:9050
+    
+  --rtmp-rtmpdump FILENAME, --rtmpdump FILENAME, -r FILENAME
+    RTMPDump is used to access RTMP streams. You can specify the
+    location of the rtmpdump executable if it is not in your PATH.
+    
+    Example: "/usr/local/bin/rtmpdump"
+    
+  --rtmp-timeout TIMEOUT
+    Timeout for reading data from RTMP streams.
+    
+    Default is 60.0.
+    
+  --stream-segment-attempts ATTEMPTS
+    How many attempts should be done to download each segment before giving up.
+    
+    This is generic option used by streams not covered by other options,
+    such as stream protocols specific to plugins, e.g. UStream.
+    
+    Default is 3.
+    
+  --stream-segment-threads THREADS
+    The size of the thread pool used to download segments.
+    Minimum value is 1 and maximum is 10.
+    
+    This is generic option used by streams not covered by other options,
+    such as stream protocols specific to plugins, e.g. UStream.
+    
+    Default is 1.
+    
+  --stream-segment-timeout TIMEOUT
+    Segment connect and read timeout.
+    
+    This is generic option used by streams not covered by other options,
+    such as stream protocols specific to plugins, e.g. UStream.
+    
+    Default is 10.0.
+    
+  --stream-timeout TIMEOUT
+    Timeout for reading data from streams.
+    
+    This is generic option used by streams not covered by other options,
+    such as stream protocols specific to plugins, e.g. UStream.
+    
+    Default is 60.0.
+    
+  --stream-url
+    If possible, translate the stream to a URL and print it.
+    
+  --subprocess-cmdline, --cmdline, -c
+    Print the command-line used internally to play the stream.
+    
+    This is only available on RTMP streams.
+    
+  --subprocess-errorlog, --errorlog, -e
+    Log possible errors from internal subprocesses to a temporary file.
+    The file will be saved in your systems temporary directory.
+    
+    Useful when debugging rtmpdump related issues.
+    
+  --subprocess-errorlog-path PATH, --errorlog-path PATH
+    Log the subprocess errorlog to a specific file rather than a temporary file.
+    Takes precedence over subprocess-errorlog.
+    
+    Useful when debugging rtmpdump related issues.
+    
+  --ffmpeg-ffmpeg FILENAME
+    FFMPEG is used to access or mux separate video and audio streams.
+    You can specify the location of the ffmpeg executable if it is
+    not in your PATH.
+    
+    Example: "/usr/local/bin/ffmpeg"
+    
+  --ffmpeg-verbose
+    Write the console output from ffmpeg to the console.
+    
+  --ffmpeg-verbose-path PATH
+    Path to write the output from the ffmpeg console.
+    
+  --ffmpeg-video-transcode CODEC
+    When muxing streams transcode the video to this CODEC.
+    
+    Default is "copy".
+    
+    Example: "h264"
+    
+  --ffmpeg-audio-transcode CODEC
+    When muxing streams transcode the audio to this CODEC.
+    
+    Default is "copy".
+    
+    Example: "aac"
+    
+
+HTTP options:
+  --http-proxy HTTP_PROXY
+    A HTTP proxy to use for all HTTP requests.
+    
+    Example: "http://hostname:port/"
+    
+  --https-proxy HTTPS_PROXY
+    A HTTPS capable proxy to use for all HTTPS requests.
+    
+    Example: "https://hostname:port/"
+    
+  --http-cookie KEY=VALUE
+    A cookie to add to each HTTP request.
+    
+    Can be repeated to add multiple cookies.
+    
+  --http-header KEY=VALUE
+    A header to add to each HTTP request.
+    
+    Can be repeated to add multiple headers.
+    
+  --http-query-param KEY=VALUE
+    A query parameter to add to each HTTP request.
+    
+    Can be repeated to add multiple query parameters.
+    
+  --http-ignore-env
+    Ignore HTTP settings set in the environment such as environment
+    variables (HTTP_PROXY, etc) or ~/.netrc authentication.
+    
+  --http-no-ssl-verify
+    Don't attempt to verify SSL certificates.
+    
+    Usually a bad idea, only use this if you know what you're doing.
+    
+  --http-disable-dh
+    Disable Diffie Hellman key exchange
+    
+    Usually a bad idea, only use this if you know what you're doing.
+    
+  --http-ssl-cert FILENAME
+    SSL certificate to use.
+    
+    Expects a .pem file.
+    
+  --http-ssl-cert-crt-key CRT_FILENAME KEY_FILENAME
+    SSL certificate to use.
+    
+    Expects a .crt and a .key file.
+    
+  --http-timeout TIMEOUT
+    General timeout used by all HTTP requests except the ones covered
+    by other options.
+    
+    Default is 20.0.
+    
+
+Plugin options:
+  --plugin-dirs DIRECTORY
+    Attempts to load plugins from these directories.
+    
+    Multiple directories can be used by separating them with a semicolon.
+    
+  --twitch-oauth-token TOKEN
+    An OAuth token to use for Twitch authentication.
+    Use --twitch-oauth-authenticate to create a token.
+    
+  --twitch-oauth-authenticate
+    Open a web browser where you can grant Streamlink access
+    to your Twitch account which creates a token for use with
+    --twitch-oauth-token.
+    
+  --twitch-cookie COOKIES
+    Twitch cookies to authenticate to allow access to subscription channels.
+    
+    Example:
+    
+      "_twitch_session_id=xxxxxx; persistent=xxxxx"
+    
+    Note: This method is the old and clunky way of authenticating with
+    Twitch, using --twitch-oauth-authenticate is the recommended and
+    simpler way of doing it now.
+    
+  --twitch-disable-hosting
+    Do not open the stream if the target channel is hosting another channel.
+    
+  --ustream-password PASSWORD
+    A password to access password protected UStream.tv channels.
+    
+  --crunchyroll-username USERNAME
+    A Crunchyroll username to allow access to restricted streams.
+    
+  --crunchyroll-password [PASSWORD]
+    A Crunchyroll password for use with --crunchyroll-username.
+    
+    If left blank you will be prompted.
+    
+  --crunchyroll-purge-credentials
+    Purge cached Crunchyroll credentials to initiate a new session
+    and reauthenticate.
+    
+  --crunchyroll-session-id SESSION_ID
+    Set a specific session ID for crunchyroll, can be used to bypass
+    region restrictions.
+    
+  --btv-username USERNAME
+    A BTV username required to access any stream.
+    
+  --btv-password PASSWORD
+    A BTV account password to use with --btv-username.
+    
+  --schoolism-email EMAIL
+    The email associated with your Schoolism account,
+    required to access any Schoolism stream.
+    
+  --schoolism-password PASSWORD
+    A Schoolism account password to use with --schoolism-email.
+    
+  --schoolism-part PART
+    Play part number PART of the lesson.
+    
+    Defaults is 1.
+    
+  --daisuki-mux-subtitles
+    Automatically mux available subtitles in to the output stream.
+    
+  --rtve-mux-subtitles
+    Automatically mux available subtitles in to the output stream.
+    
+  --funimation-language {en,ja,english,japanese}
+    The audio language to use for Funimation streams; japanese or english.
+    
+    Default is "english".
+    
+  --funimation-mux-subtitles
+    Enable automatically including available subtitles in to the output stream.
+    
+  --tvplayer-email EMAIL
+    The email address used to register with tvplayer.com.
+    
+  --tvplayer-password PASSWORD
+    A TVPlayer account password to use with --tvplayer-email.
+    
+  --pluzz-mux-subtitles
+    Automatically mux available subtitles in to the output stream.
+    
+  --wwenetwork-email EMAIL
+    The email associated with your WWE Network account,
+    required to access any WWE Network stream.
+    
+  --wwenetwork-password PASSWORD
+    A WWE Network account password to use with --wwenetwork-email.
+    
+  --animelab-email EMAIL
+    The email address used to register with animelab.com.
+    
+  --animelab-password PASSWORD
+    A TVPlayer account password to use with --animelab-email.
+    
+  --npo-subtitles
+    Include subtitles for the deaf or hard of hearing, if available.
+    
+  --liveedu-email EMAIL
+    The email address used to register with liveedu.tv.
+    
+  --liveedu-password PASSWORD
+    A LiveEdu account password to use with --liveedu-email.
+    
+  --bbciplayer-username USERNAME
+    The username used to register with bbc.co.uk.
+    
+  --bbciplayer-password PASSWORD
+    A bbc.co.uk account password to use with --bbciplayer-username.
+    
+  --neulion-username USERNAME, --ufctv-username USERNAME
+    The username used to register with your neulion provider.
+    
+  --neulion-password PASSWORD, --ufctv-password PASSWORD
+    A neulion provider account password to use with --neulion-username.
+    
+  --zattoo-email EMAIL
+    The email associated with your zattoo account, required to access any zattoo stream.
+    
+  --zattoo-password PASSWORD
+    A zattoo account password to use with --zattoo-email.
+    
+  --zattoo-purge-credentials
+    Purge cached zattoo credentials to initiate a new session
+    and reauthenticate.
+    
+
+For more in-depth documentation see:
+  https://streamlink.github.io
+
+Please report broken plugins or bugs to the issue tracker on Github:
+  https://github.com/streamlink/streamlink/issues

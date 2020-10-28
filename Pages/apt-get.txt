@@ -1,0 +1,32 @@
+Usage: apt-get [options] command
+       apt-get [options] install|remove pkg1 [pkg2 ...]
+       apt-get [options] source pkg1 [pkg2 ...]
+
+apt-get is a command line interface for retrieval of packages
+and information about them from authenticated sources and
+for installation, upgrade and removal of packages together
+with their dependencies.
+
+Meist benutzte Befehle:
+  update - neue Paketinformationen holen
+  upgrade - Upgrade (Paketaktualisierung) durchführen
+  install - neue Pakete installieren (paket ist libc6, nicht libc6.deb)
+  remove - Pakete entfernen
+  purge - Pakete vollständig entfernen (inkl. Konfigurationsdateien)
+  autoremove - alle nicht mehr verwendeten Pakete automatisch entfernen
+  dist-upgrade - Upgrade (Paketaktualisierung) für die komplette Distribution durchführen, siehe apt-get(8)
+  dselect-upgrade - der Auswahl von »dselect« folgen
+  build-dep - Bauabhängigkeiten für Quellpakete konfigurieren
+  clean - heruntergeladene Archive löschen
+  autoclean - veraltete heruntergeladene Archive löschen
+  check - überprüfen, ob es unerfüllte Abhängigkeiten gibt
+  source - Quellarchive herunterladen
+  download - das Binärpaket in das aktuelle Verzeichnis herunterladen
+  changelog - Änderungsprotokoll für das angegebene Paket herunterladen und anzeigen
+
+Siehe »apt-get(8)« für mehr Informationen über die verfügbaren Befehle.
+Konfigurations-Optionen und -Syntax sind detailliert in »apt.conf(5)« aufgeführt.
+Informationen zur Konfiguration der Quellen finden Sie in »sources.list(5)« .
+Paket- und Versionsauswahlen können mittels »apt_preferences(5)« erfolgen.
+Sicherheitsdetails sind verfügbar in »apt-secure(8)«.
+                                     Dieses APT hat Super-Kuh-Kräfte.

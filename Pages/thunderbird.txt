@@ -1,0 +1,42 @@
+Usage: thunderbird [ options ... ] [URL]
+       where options include:
+
+X11 options
+  --display=DISPLAY  X display to use
+  --sync             Make X calls synchronous
+  --g-fatal-warnings Make all warnings fatal
+
+Thunderbird options
+  -h or --help       Print this message.
+  -v or --version    Print Thunderbird version.
+  -P <profile>       Start with <profile>.
+  --profile <path>   Start with profile at <path>.
+  --migration        Start with migration wizard.
+  --ProfileManager   Start with ProfileManager.
+  --no-remote        Do not accept or send remote commands; implies
+                     --new-instance.
+  --new-instance     Open new instance, not a new window in running instance.
+  --UILocale <locale> Start with <locale> resources as UI Locale.
+  --safe-mode        Disables extensions and themes for this session.
+  -addressbook       Open the address book at startup.
+  -compose [ <options> ] Compose a mail or news message. Options are specified
+                     as string "option='value,...',option=value,..." and
+                     include: from, to, cc, bcc, newsgroups, subject, body,
+                     message (file), attachment (file), format (html | text).
+                     Example: "to=john@example.com,subject='Dinner tonight?'"
+  --jsconsole        Open the Browser Console.
+  --jsdebugger       Open the Browser Toolbox.
+  --devtools         Open DevTools on initial load.
+  --start-debugger-server [ws:][ <port> | <path> ] Start the debugger server on
+                     a TCP port or Unix domain socket path. Defaults to TCP port
+                     6000. Use WebSocket protocol if ws: prefix is specified.
+  -mail              Open the mail folder view.
+  -mail <URL>        Open the message specified by this URL.
+  -news              Open the news client.
+  -setDefaultMail    Set this app as the default mail client.
+  -options           Open the options dialog.
+  -file              Open the specified email file.
+
+      -g or --debug          Start within debugger
+      -d or --debugger       Specify debugger to start with (eg, gdb or valgrind)
+      -a or --debugger-args  Specify arguments for debugger

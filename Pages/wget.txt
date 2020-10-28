@@ -1,0 +1,261 @@
+GNU Wget 1.17.1, ein nicht-interaktives Netz-Werkzeug zum Download von Dateien.
+Syntax: wget [OPTION]... [URL]...
+
+Erforderliche Argumente zu langen Optionen sind auch bei kurzen Optionen erforderlich.
+
+Beim Start:
+  -V,  --version                   Programmversion von Wget anzeigen und beenden
+  -h,  --help                      diese Hilfe anzeigen
+  -b,  --background                nach dem Starten in den Hintergrund gehen
+  -e,  --execute=BEFEHL            einen ».wgetrc«-artigen Befehl ausführen
+
+Log-Datei schreiben und Eingabe-Datei:
+  -o,  --output-file=DATEI         Protokoll-Meldungen in DATEI schreiben
+  -a,  --append-output=DATEI       Meldungen an DATEI anhängen
+  -d,  --debug                     Debug-Ausgabe anzeigen
+  -q,  --quiet                     keine Ausgabe von Meldungen
+  -v,  --verbose                   ausführliche Meldungen (Vorgabe)
+  -nv, --no-verbose                weniger Meldungen, aber nicht stumm
+       --report-speed=TYP          Bandbreite als TYP ausgeben.
+                                     TYP kann »bits« sein.
+  -i,  --input-file=DATEI          in lokaler oder externer DATEI
+                                     gelistete URLs holen
+  -F,  --force-html                Eingabe-Datei als HTML behandeln
+  -B,  --base=URL                  Verweise in der HTML Eingabedatei (-i -F)
+                                   relativ zur URL auflösen
+       --config=DATEI              Datei mit der Konfiguration
+       --no-config                 keine Konfigrationsdatei verwenden
+       --rejected-log=DATEI        Grund der URL-Ablehnung in DATEI schreiben
+
+Download:
+  -t,  --tries=ZAHL                Anzahl der Wiederholversuche auf ZAHL setzen
+                                   (0 steht für unbegrenzt)
+       --retry-connrefused         Wiederholen, auch wenn der Partner die
+                                     Verbindung abgelehnt hat
+  -O   --output-document=DATEI     Dokumente in DATEI schreiben
+  -nc, --no-clobber                Downloads überspringen, die bestehende
+                                     Dateien überschreiben würden
+  -c,  --continue                  Fortführung des Downloads einer bereits zum
+                                     Teil geholten Datei
+       --start-pos=OFFSET          Start Download ab OFFSET (Null-basiert)
+       --progress=STYLE            Fortschrittsanzeige mit STYLE darstellen
+       --show-progress             Immer eine Fortschrittsanzeige darstellen
+  -N,  --timestamping              Nur Dateien holen, die neuer als die lokalen
+                                     Dateien sind
+       --no-if-modified-since      Die Bedingung if-modified-since bei
+                                     GET-Requests im Zeitstempel-Modus
+                                     nicht verwenden
+       --no-use-server-timestamps  don't set the local file's timestamp by
+                                     the one on the server
+  -S,  --server-response           Antwort des Servers anzeigen
+       --spider                    kein Download (nichts herunterladen)
+  -T,  --timeout=SEKUNDEN          alle Timeouts auf SEKUNDEN setzen
+       --dns-timeout=SEKUNDEN      den Timeout der DNS-Abfrage auf
+                                     SEKUNDEN setzen
+       --connect-timeout=SEKUNDEN  den Verbindungs-Timeout auf SEKUNDEN setzen
+       --read-timeout=SEKUNDEN     den Lese-Timeout auf SEKUNDEN setzen
+  -w,  --wait=SEKUNDEN             SEKUNDEN zwischen den Downloads warten
+       --waitretry=SEKUNDEN        1..SEKUNDEN zwischen den erneuten Versuchen
+                                     warten
+       --random-wait               Zwischen 0,5*WAIT und 1,5*WAIT Sekunden
+                                     zwischen den Abfragen warten
+       --no-proxy                  Keinen Proxy verwenden
+  -Q,  --quota=ZAHL                Kontingent für den Download auf ZAHL setzen
+       --bind-address=ADRESSE      An die ADRESSE (Hostname oder IP) des
+                                     lokalen Rechners binden
+       --limit-rate=RATE           Datenrate beim Download auf RATE begrenzen
+       --no-dns-cache              Zwischenspeichern von DNS-Abfragen
+                                     ausschalten
+       --restrict-file-names=OS    Verwendbare Zeichen in Dateinamen auf
+                                     diejenigen einschränken, die das
+                                     Betriebssystem erlaubt
+       --ignore-case               Groß-/Kleinschreibung bei Datei- und
+                                     Verzeichnisnamen ignorieren
+  -4,  --inet4-only                Nur zu IPv4-Adressen verbinden
+  -6,  --inet6-only                Nur zu IPv6-Adressen verbinden
+       --prefer-family=FAMILIE     Zunächst eine Verbindung zur angegebenen
+                                     Familie aufbauen, eins von »IPv6«,
+                                     »IPv4« oder »none«
+       --user=BENUTZER             BENUTZER als ftp- und http-Benutzer
+                                     verwenden
+       --password=PASSWORT         PASSWORT als ftp- und http-Passwort
+                                     verwenden
+       --ask-password              Nach Passworten fragen
+       --no-iri                     Unterstützung für IRI abschalten
+       --local-encoding=ENC        ENC als die lokale Kodierung
+                                     für IRIs verwenden
+       --remote-encoding=ENC       ENC als die externe Standardkodierung
+                                     verwenden
+       --unlink                    Datei löschen vor dem Überschreiben
+
+Verzeichnisse:
+  -nd  --no-directories            keine Verzeichnisse anlegen
+  -x,  --force-directories         Anlegen von Verzeichnissen erzwingen
+  -nH, --no-host-directories       keine Host-Verzeichnisse anlegen
+       --protocol-directories     Den Protokollnamen in Verzeichnissen
+                                    verwenden
+  -P,  --directory-prefix=PRÄFIX   Dateien unter dem Verzeichnis PRÄFIX/..
+                                   speichern
+       --cut-dirs=ZAHL             ZAHL der Verzeichnisebenen der Gegenseite
+                                   überspringen
+
+HTTP-Optionen:
+       --http-user=BENUTZER        http-Benutzer auf BENUTZER setzen
+       --http-passwd=PASSWORT      http-Passwort auf PASSWORT setzen
+       --no-cache                  Serverseitige Zwischenspeicherung der Daten
+                                     verbieten
+       --default-page=NAME        Den Namen der Standard-Seite ändern
+                                     (normalerweise »index.html«)
+  -E,  --adjust-extension          alle text/html-Dokumente mit der richtigen
+                                     Namenserweiterung speichern
+       --ignore-length             das »Content-Length«-Kopffeld ignorieren
+       --header=ZEICHENKETTE       ZEICHENKETTE in die Kopfzeilen einfügen
+       --max-redirect              maximale Anzahl erlaubter »Redirects«
+                                     (Umleitungen) pro Seite
+       --proxy-user=BENUTZER       BENUTZER als Proxy-Benutzername verwenden
+       --proxy-passwd=PASS         PASS als Proxy-Passwort verwenden
+       --referer=URL               die Kopfzeile »Referer: URL« der HTTP-
+                                     Anforderung hinzufügen
+       --save-headers              den HTTP-Vorspann (header lines) in einer
+                                     Datei sichern
+  -U,  --user-agent=AGENT          als AGENT anstelle von Wget/VERSION
+                                     identifizieren
+       --no-http-keep-alive        »HTTP keep-alive« (persistente Verbindungen)
+                                   deaktivieren
+       --no-cookies                Cookies nicht verwenden
+       --load-cookies=DATEI        Cookies vor der Sitzung aus der DATEI laden
+       --save-cookies=DATEI        Cookies nach der Sitzung in der DATEI
+                                     speichern
+       --keep-session-cookies      (nicht-permanente) Session-Cookies
+                                      laden und speichern
+       --post-data=ZEICHENKETTE    Die POST-Methode verwenden, dabei die
+                                     ZEICHENKETTE als Daten senden
+       --post-file=DATEI           Die POST-Methode verwenden, dabei den Inhalt
+                                     aus DATEI verwenden
+       --method=HTTPMethod         die Methode »HTTPMethod« im Header verwenden
+       --body-data=ZEICHENKETTE    ZEICHENKETTE als Daten verwenden.
+                                     »--method« muss angegeben werden
+       --body-file=DATEI           Den Inhalt der Datei als Daten senden.
+                                     »--method« muss angegeben werden.
+       --content-disposition       Den Content-Disposition-Header bei der
+                                     Auswahl lokaler Dateinamen beachten
+                                     (EXPERIMENTELL).
+       --content-on-error          Den empfangenen Inhalt ausgeben, wenn
+                                     der Server einen Fehler meldet.
+       --auth-no-challenge         »Basic HTTP authentication«-Informationen
+                                     senden, ohne zuerst auf die Aufforderung des
+                                     Serverszu warten
+
+HTTPS (SSL) Optionen:
+       --secure-protocol=PR        Als sicheres Protokoll eines aus »auto«,
+                                     »SSLv2«, »SSLv3«, »TLSv1« oder »PFS«
+                                     verwenden.
+       --https-only                Nur sicheren HTTPS-Verweisen folgen
+       --no-check-certificate      Das Server-Zertifikat nicht prüfen
+       --certificate=DATEI         Datei mit dem Client-Zertifikat
+       --certificate-type=TYP      Typ des Client-Zertifikates, entweder
+                                     »PEM« oder »DER«
+       --private-key=DATEI         Datei mit dem geheimen Schlüssel
+       --private-key-type=TYP      Typ des geheimen Schlüssels, entweder
+                                     »PEM« oder »DER«
+       --ca-certificate=DATEI      Datei mit der CA-Sammlung
+       --ca-directory=VERZEICHNIS  Verzeichnis mit der Hash-Liste der CAs
+       --crl-file=DATEI            Datei mit der CRL-Sammlung
+       --random-file=DATEI         Datei mit Zufallsdaten zur Initialisierung
+                                     des SSL Pseudo-Zufallszahlen-Generators
+       --egd-file=DATEI            Dateiname des EGD-Sockets mit Zufallszahlen
+
+HSTS-Optionen:
+       --no-hsts                   HSTS nicht verwenden
+       --hsts-file                 Pfad der HSTS Datenbank
+                                     (überschreibt den Standardwert)
+
+FTP-Optionen:
+       --ftp-user=BENUTZER         BENUTZER als ftp-Benutzername verwenden
+       --ftp-password=PASSWORT     PASSWORT als ftp-Passwort verwenden
+       --no-remove-listing         ».listing«-Dateien nicht entfernen
+       --no-glob                   FTP-Dateinamens-Globbing ausschalten
+       --no-passive-ftp            Nur »aktiven« Übertragungsmodus verwenden
+       --preserve-permissions      Die Rechte der fernen Datei erhalten
+       --retr-symlinks             falls auftretend, verlinkte Dateien holen (keine
+                                     Verzeichnisse)
+
+FTPS-Optionen:
+       --ftps-implicit             Verwende implizit FTPS
+                                     (Standardport ist 990)
+       --ftps-resume-ssl           Beim Öffnen der Daten-Verbidung die SSL/TLS-Sitzung der
+                                     Steuer-Verbindung fortsetzen
+       --ftps-clear-data-connection    nur den Steuerkanal verschlüsseln; alle Daten bleiben im Klartext
+       --ftps-fallback-to-ftp          verwende FTP falls FTPS vom Zielserver nicht unterstützt wird
+WARC-Optionen:
+       --warc-file=DATEINAME       Die Anfrage- und Antwortdaten in einer
+                                     .warc.gz-Datei speichern
+       --warc-header=ZEICHENKETTE  ZEICHENKETTE in den warcinfo-Satz einfügen
+       --warc-max-size=ZAHL        Die Maximalgröße der WARC-Dateien auf
+                                     ZAHL setzen
+       --warc-cdx                  CDX-Index-Dateien schreiben
+       --warc-dedup=DATEINAME      Datensätze nicht speichern, die in dieser
+                                     CDX-Datei enthalten sind
+       --no-warc-compression       WARC-Dateien nicht mit GZIP komprimieren
+       --no-warc-digests           keine SHA1-Prüfsummen berechnen
+       --no-warc-keep-log          Die Protokolldatei nicht in einem WARC-Datensatz
+                                     speichern
+       --warc-tempdir=VERZEICHNIS  Verzeichnis für temporäre Dateien, die durch
+                                     den WARC-Schreiber erzeugt werden
+
+Rekursives Holen:
+  -r,  --recursive                 rekursiver Download
+  -l,  --level=Zahl                maximale Rekursionstiefe (»inf« oder »0«
+                                     steht für ohne Begrenzung)
+       --delete-after              geholte Dateien nach dem Download löschen
+  -k,  --convert-links             Verweise in HTML- oder CSS-Downloads
+                                     in lokale Verknüpfungen umwandeln
+       --convert-file-only         convert the file part of the URLs only (usually known as the basename)
+       --backup=N                  vor dem Speichern der Datei X, bis zu N
+                                     Sicherungsdateien behalten.
+  -K,  --backup-converted          vor dem Umwandeln der Datei X, eine
+                                     Sicherung als X.orig anlegen.
+  -m,  --mirror                    Kurzform, die
+                                     »-N -r -l inf --no-remove-listing«
+                                     entspricht.
+  -p,  --page-requisites           alle Bilder usw. holen, die für die Anzeige
+                                     der HTML-Seite notwendig sind
+       --strict-comments           Strikte Handhabung (SGML) von
+                                     HTML-Kommentaren
+
+Rekursiv erlauben/zurückweisen:
+  -A,  --accept=LISTE              komma-unterteilte Liste der erlaubten
+                                     Dateiendungen
+  -R,  --reject=LISTE              komma-unterteilte Liste der
+                                     zurückzuweisenden Erweiterungen
+       --accept-regex=REGEX        regulärer Ausdruck, zu dem die akzeptierten
+                                     URLs passen
+       --reject-regex=REGEX        regulärer Ausdruck, zu dem die abgewiesenen
+                                   URLs passen
+       --regex-type=TYPE           Typ des regulären Ausdrucks (posix|pcre).
+  -D,  --domains=LISTE             komma-unterteilte Liste der erlaubten
+                                     Domains
+       --exclude-domains=LISTE     komma-unterteilte Liste der
+                                     zurückzuweisenden Domains
+       --follow-ftp                FTP-Verweisen von HTML-Dokumenten aus
+                                     folgen
+       --follow-tags=LISTE         komma-unterteilte Liste der zu folgenden
+                                     HTML-Tags
+       --ignore-tags=LISTE         komma-unterteilte Liste der zu
+                                     missachtenden HTML-Tags
+  -H,  --span-hosts                wenn »--recursive«, auch zu fremden Hosts
+                                     gehen
+  -L,  --relative                  nur relativen Verweisen folgen
+  -I,  --include-directories=LISTE  Liste der erlaubten Verzeichnisse
+       --trust-server-names        Den durch die letzte Komponente der
+                                     Weiterleitungs-URL spezifizierten Namen
+                                     verwenden.
+  -X,  --exclude-directories=LISTE  Liste der auszuschließenden Verzeichnisse
+  -np, --no-parent                 nicht in das übergeordnete Verzeichnis
+                                   wechseln
+
+Fehlerberichte und Verbesserungsvorschläge bitte an <bug-wget@gnu.org>
+schicken.
+
+Für die deutsche Übersetzung ist die Mailingliste
+<translation-team-de@lists.sourceforge.net> zuständig.

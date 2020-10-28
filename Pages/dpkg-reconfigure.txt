@@ -1,0 +1,73 @@
+DPKG-RECONFIGURE.DE.8(8)            Debconf           DPKG-RECONFIGURE.DE.8(8)
+
+NAME
+       dpkg-reconfigure - rekonfiguriere ein bereits installiertes Paket
+
+ÜBERSICHT
+        dpkg-reconfigure [Optionen] Pakete
+
+BESCHREIBUNG
+       dpkg-reconfigure konfiguriert Pakete erneut, nachdem sie bereits
+       installiert wurden. Übergeben Sie ihm den oder die Namen des oder der
+       Pakete, die erneut konfiguriert werden sollen. Es stellt dann
+       Konfigurationsfragen, so ähnlich wie bei der Installation des Pakets.
+
+       Falls Sie nur die aktuelle Konfiguration eines Paketes anschauen
+       wollen, lesen Sie stattdessen debconf-show(1).
+
+OPTIONEN
+       -fTyp, --frontend=Typ
+           Wählt die zu benutzende Benutzerschnittstelle. Die standardmäßige
+           Schnittstelle kann durch das Folgende dauerhaft geändert werden:
+
+            dpkg-reconfigure debconf
+
+           Beachten Sie, dass, falls Sie normalerweise Debconf die nicht-
+           interaktive Schnittstelle benutzen lassen, dpkg-reconfigure hier
+           stattdessen die Benutzerschnittstelle Dialog benutzt, so dass Sie
+           tatsächlich dazu kommen, das Paket erneut zu konfigurieren.
+
+       -pWert, --priority=Wert
+           Gibt die Schwell-Priorität für Fragen an, die angezeigt werden
+           sollen. dpkg-reconfigure zeigt normalerweise Fragen mit niedriger
+           Priorität an, egal was Ihre voreingestellte Priorität ist. Siehe
+           debconf(7) für eine Liste.
+
+       --default-priority
+           Benutze was immer die voreingestellte Priorität für Fragen ist,
+           statt die niedrige Priorität (low) zu erzwingen.
+
+       -u, --unseen-only
+           Standardmäßig werden alle Fragen angezeigt, selbst wenn sie schon
+           beantwortet wurden. Falls dieser Parameter aber gesetzt ist, werden
+           nur die Fragen gestellt, die noch nicht gesehen wurden.
+
+       --force
+           Zwinge dpkg-reconfigure ein Paket erneut zu konfigurieren, selbst
+           wenn es in einem inkonsistenten oder defekten Zustand ist. Mit
+           Vorsicht zu benutzen.
+
+       --no-reload
+           Vermeidet, dass dpkg-reconfigure Vorlagen erneut lädt. Mit Vorsicht
+           zu benutzen; dies vermeidet, dass dpkg-reconfigure defekte Vorlage-
+           Datenbanken repariert. Es kann aber in eingeschränkten Umgebungen
+           nützlich sein, wo das erneute Schreiben der Vorlage-Datenbank teuer
+           ist.
+
+       -h, --help
+           Zeige Hilfe zur Benutzung an.
+
+SIEHE AUCH
+       debconf(7)
+
+AUTOR
+       Joey Hess <joeyh@debian.org>
+
+ÜBERSETZUNG
+       Die deutsche Übersetzung wurde 2008 von Florian Rehnisch
+       <eixman@gmx.de> und 2008-2009, 2012 Helge Kreutzmann
+       <debian@helgefjell.de> angefertigt. Diese Übersetzung ist Freie
+       Dokumentation; lesen Sie die GNU General Public License Version 2 oder
+       neuer für die Kopierbedingungen. Es gibt KEINE HAFTUNG.
+
+                                  2015-11-10          DPKG-RECONFIGURE.DE.8(8)

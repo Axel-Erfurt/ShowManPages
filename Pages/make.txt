@@ -1,0 +1,53 @@
+Aufruf: make [Optionen] [Ziele] …
+Optionen:
+  -b, -m                      Wird aus Kompatibilitätsgründen ignoriert
+  -B, --always-make           Alle Ziele ohne Bedingungen erstellen
+  -C VERZEICHNIS, --directory=VERZEICHNIS
+                              In VERZEICHNIS wechseln, bevor etwas getan wird
+  -d                          Viele Informationen zur Fehlersuche ausgeben.
+  --debug[=KENNUNGEN]         Verschiedene Arten von Debug-Information ausgeben
+  -e, --environment-overrides
+                              Umgebungsvariablen überschreiben „make“-Steuerdateien
+  --eval=ZEIENKETTE           ZEICHENKETTE wie einen Makedatei-Eintrag auswerten.
+  -f DATEI, --file=DATEI, --makefile=DATEI
+                              DATEI als Makefile lesen
+  -h, --help                  Diese Meldung ausgeben und beenden
+  -i, --ignore-errors         Fehler in Regeln werden irgnoriert
+  -I VERZEICHNIS, --include-dir=VERZEICHNIS
+                              VERZEICHNIS nach eingebundenen
+                              Makedateien durchsuchen
+  -j [N], --jobs[=N]          N Jobs gleichzeitig erlauben; unbegrenzte Anzahl 
+                              von Jobs ohne Argument
+  -k, --keep-going            Weiterlaufen, auch wenn einige Targets nicht
+                              erzeugt werden konnten
+  -l [N], --load-average[=N], --max-load[=N]
+                              Keine Jobs starten bevor die Auslastung nicht unter N ist.
+  -L, --check-symlink-times   Den neueste Modifizierungszeit zwischen
+                              symbolischer Verküpfung und dem Ziel verwenden.
+  -n, --just-print, --dry-run, --recon
+                              Keine Regel ausführen, nur ausgeben.
+  -o DATEI, --old-file=DATEI, --assume-old=DATEI
+                              DATEI als sehr alt ansehen und nicht neu erzeugen.
+  -O[TYP], --output-sync[=TYP]
+                              Synchronisiert die Ausgabe paralleler Jobs per TYP.
+  -p, --print-data-base       Die interne Datenbank von „make“ ausgeben
+  -q, --question              Keine Regel ausführen; der Exit-Status gibt an, ob die Dateien
+                              aktuell sind
+  -r, --no-builtin-rules      Die eingebauten impliziten Regeln deaktivieren.
+  -R, --no-builtin-variables  Die eingebauten Variablenbelegungen deaktivieren.
+  -s, --silent, --quiet       Regeln nicht ausgeben.
+  -S, --no-keep-going, --stop
+                              -k abschalten.
+  -t, --touch                 Die Ziele werden nur als aktualisiert markiert,
+                              nicht tatsächlich erneuert
+  --trace                     Viele Informationen zur Fehlersuche ausgeben
+  -v, --version               Die Versionsnummer von „make“ ausgeben und Programm beenden
+  -w, --print-directory       Das aktuelle Verzeichnis ausgeben
+  --no-print-directory        -w abschalten, selbst wenn es implizit eingeschaltet wurde.
+  -W DATEI, --what-if=DATEI, --new-file=DATEI, --assume-new=DATEI
+                              DATEI als unendlich neu erachten.
+  --warn-undefined-variables  Eine Warnung ausgeben, wenn eine undefinierte
+                                     Variable referenziert wird.
+
+Diese Programm wurde für x86_64-pc-linux-gnu gebaut
+Fehlermeldungen (auf Englisch) an <bug-make@gnu.org> senden.

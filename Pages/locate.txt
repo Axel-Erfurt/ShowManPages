@@ -1,0 +1,27 @@
+Benutzung: locate [OPTION]... [ZEICHENKETTE]...
+Sucht nach Einträgen in einer mlocate-Datenbank.
+
+  -A, --all              zeigt nur Einträge mit allen gesuchten Zeichenketten
+  -b, --basename         sucht nur im Dateinamen nach dem Muster
+  -c, --count            zeigt nur die Anzahl der gefundenen Einträge an
+  -d, --database DBPFAD  benutzt DBPFAD anstatt der Standard-Datenbank (die da wäre
+                         /var/lib/mlocate/mlocate.db)
+  -e, --existing         zeigt nur Einträge von jetzt existierenden Dateien
+  -L, --follow           folgt symbolischen Links, wenn Dateiexistenz überprüft wird
+                         (Standard)
+  -h, --help             zeige diese Hilfe
+  -i, --ignore-case      ignoriert Groß-, Kleinschreibung bei der Suche nach Einträgen
+  -l, --limit, -n ANZAHL zeigt nur ANZAHL Einträge an
+  -m, --mmap             ignoriert, nur für Abwärtskompatibilität
+  -P, --nofollow, -H     folgt nicht den symbolischen Links, wenn Dateiexistenz überprüft wird
+  -0, --null             trennt Einträge mit ASCII NUL in der Ausgabe
+  -S, --statistics       sucht nicht nach Einträgen, zeigt Statistiken über jede
+                         benutzte Datenbank an
+  -q, --quiet            zeigt keine Fehlermeldungen beim Lesen der Datenbank an
+  -r, --regexp REGEXP    sucht nach dem regulären Ausdruck REGEXP anstatt der Zeichenfolge
+      --regex            die Zeichenfolge ist ein erweiterter regulärer Ausdruck
+  -s, --stdio            ignoriert, nur für Abwärtskompatibilität
+  -V, --version          zeigt Versionsinformationen
+  -w, --wholename        sucht im ganzen Pfad-Namen (Standard)
+
+Fehlerberichte an mitr@redhat.com.

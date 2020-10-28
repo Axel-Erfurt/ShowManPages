@@ -1,0 +1,33 @@
+Aufruf:
+  xfce4-screenshooter [OPTION …] Project-Id-Version: Xfce Apps
+Report-Msgid-Bugs-To: 
+POT-Creation-Date: 2014-12-26 00:31+0100
+PO-Revision-Date: 2015-01-09 11:57+0000
+Last-Translator: Tobias Bannert <tobannert@gmail.com>
+Language-Team: German (http://www.transifex.com/projects/p/xfce-apps/language/de/)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+Language: de
+Plural-Forms: nplurals=2; plural=(n != 1);
+
+
+Hilfeoptionen:
+  -h, --help              Hilfeoptionen anzeigen
+  --help-all              Alle Hilfeoptionen anzeigen
+  --help-gtk              GTK+-Optionen anzeigen
+
+Anwendungsoptionen:
+  -c, --clipboard         Bildschirmfoto in die Zwischenablage kopieren
+  -d, --delay             Verzögerung in Sekunden vor Erstellung des Bildschirmfotos
+  -f, --fullscreen        Bildschirmfoto des ganzen Bildschirms erstellen
+  -m, --mouse             Den Mauszeiger auf dem Bildschirmfoto anzeigen
+  -o, --open              Anwendung zum Öffnen des Bildschirmfotos
+  -r, --region            Den aufzunehmenden Bereich auswählen, indem Sie auf einen Punkt auf dem Bildschirm klicken, ohne die Maustaste loszulassen, den Mauszeiger dann an das entgegengesetzte Ende des Bereichs ziehen und dann die Taste loslassen.
+  -s, --save              Der Ordner, in dem das Bildschirmfoto gespeichert werden soll
+  -u, --upload            Auf ZimageZ hochladen, einem kostenlosen Bilderdienst
+  -i, --imgur             Auf Imgur hochladen, einem kostenlosen Bilderdienst
+  -V, --version           Versionsinformation
+  -w, --window            Bildschirmfoto des aktuellen Fensters erstellen
+  --display=ANZEIGE       X-Anzeige, die verwendet werden soll
+

@@ -1,0 +1,11 @@
+Usage: zeal [options] url
+Zeal - Offline documentation browser.
+
+Options:
+  -h, --help          Displays this help.
+  -v, --version       Displays version information.
+  -f, --force         Force the application run.
+  -q, --query <term>  [DEPRECATED] Query <search term>.
+
+Arguments:
+  url                 dash[-plugin]:// URL

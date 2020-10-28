@@ -1,0 +1,25 @@
+Aufruf:
+  xfce4-terminal [OPTION...]
+
+Allgemeine Einstellungen:
+  -h, --help; -V, --version; --disable-server; --color-table; --preferences;
+  --default-display=Anzeige; --default-working-directory=Verzeichnis
+
+Fenster und Reiter trennen::
+  --tab; --window
+
+Reitereinstellungen:
+  -x, --execute; -e, --command=Befehl; -T, --title=Titel;
+  --dynamic-title-mode=Modus ('replace', 'before', 'after', 'none');
+  --initial-title=Titel; --working-directory=Verzeichnis; -H, --hold;
+  --active-tab; --color-text=color; --color-bg=color
+
+Fenstereinstellungen:
+  --display=Anzeige; --geometry=Abmessungen; --role=Rolle; --drop-down;
+  --startup-id=Zeichenkette; -I, --icon=Symbol; --fullscreen; --maximize; --minimize;
+  --show-menubar, --hide-menubar; --show-borders, --hide-borders;
+  --show-toolbar, --hide-toolbar; --show-scrollbar, --hide-scrollbar;
+  --font=Schrift:; --zoom=Vergrößerung
+
+Bitte die Bedienungsanleitung von xfce4-terminal für eine ausführliche Erklärung des Obigen lesen.
+

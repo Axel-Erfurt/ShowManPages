@@ -1,0 +1,37 @@
+Aufruf: cut OPTION... [DATEI]...
+Ausgewählte Teile der Zeilen von jeder DATEI auf Standardausgabe ausgeben.
+
+Ohne DATEI oder wenn DATEI „-“ ist, Standardeingabe lesen.
+
+Erforderliche Argumente für lange Optionen sind auch für kurze erforderlich.
+  -b, --bytes=LISTE       nur diese Bytes ausgeben
+  -c, --characters=LISTE  nur diese Zeichen ausgeben
+  -d, --delimiter=TRENN   TRENN anstelle von Tabulator als Trenner benutzen
+  -f, --fields=LISTE      nur diese Felder ausgeben; außerdem jede Zeile
+                            ausgeben, die kein Trennzeichen enthält, außer die
+                            Option -s ist gegeben
+  -n                      (wird ignoriert)
+      --complement        das Komplement der Menge der gewählten Bytes,
+                            Zeichen oder Felder bilden
+  -s, --only-delimited    keine Zeilen ausgeben, die keinen Trenner enthalten
+      --ouput-delimiter=ZKETTE  ZKETTE als Ausgabetrennzeichen benutzen;
+                            Voreinstellung ist das Eingabetrennzeichen
+  -z, --zero-terminated    line delimiter is NUL, not newline
+      --help     diese Hilfe anzeigen und beenden
+      --version  Versionsinformation anzeigen und beenden
+
+Benutzen Sie genau eins aus -b, -c oder -f. Jede LISTE besteht aus einem
+oder mehreren kommagetrennten Bereichen. Die gewählte Eingabe wird in
+derselben Reihenfolge geschrieben, wie sie gelesen wird, und genau einmal
+geschrieben.
+Jeder Bereich ist eins aus:
+
+  N     Ntes Byte, Zeichen oder Feld, beginnend von 1
+  N-    vom Nten Byte, Zeichen oder Feld bis zum Ende der Zeile
+  N-M   vom Nten zum Mten (einschl.) Byte, Zeichen oder Feld
+  -M    vom ersten zum Mten (einschl.) Byte, Zeichen oder Feld
+
+GNU coreutils Onlinehilfe: <http://www.gnu.org/software/coreutils/>
+Melden Sie Übersetzungsfehler für cut an <translation-team-de@lists.sourceforge.net>
+Die vollständige Dokumentation ist hier: <http://www.gnu.org/software/coreutils/cut>
+oder auch lokal mittels „info '(coreutils) cut invocation'“

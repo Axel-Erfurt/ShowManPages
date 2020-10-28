@@ -1,0 +1,43 @@
+Usage:
+
+pmount [options] <device> [<label>]
+
+  Mount <device> to a directory below /media/ if policy requirements
+  are met (see pmount(1) for details). If <label> is given, the mount point
+  will be /media/<label>, otherwise it will be /media/<device>.
+  If the mount point does not exist, it will be created.
+
+pmount --lock <Gerät> <pid>
+  Verhindert weitere pmount-Aufrufe für <Gerät> bis es wieder entsperrt
+  ist. <pid> gibt die ID des Prozesses an, der die Sperre hält.  Dies
+  ermöglicht das Sperren eines Gerätes von mehreren unabhängigen
+  Prozessen und vermeidet unendliche Sperren von abgestürzten
+  Prozessen (Sperren von nichtexistierenden Prozessen werden gelöscht
+  bevor eine Einbindung versucht wird).
+
+pmount --unlock <Gerät> <pid>
+  Hebt die Sperrung von <Gerät> durch den Prozess <pid> wieder auf.
+
+Options:
+  -r          : force <device> to be mounted read-only
+  -w          : force <device> to be mounted read-write
+  -s, --sync  : mount <device> with the 'sync' option (default: 'async')
+  -A, --noatime
+                mount <device> with the 'noatime' option (default: 'atime')
+  -e, --exec  : mount <device> with the 'exec' option (default: 'noexec')
+  -t <fs>     : mount as file system type <fs> (default: autodetected)
+  -c <charset>: use given I/O character set (default: 'utf8' if called
+                in an UTF-8 locale, otherwise mount default)
+  -u <umask>  : use specified umask instead of the default (only for
+                file sytems which actually support umask setting)
+  --fmask <fmask>
+                use specified fmask
+  --dmask <dmask>
+                use specified dmask
+  -p <file>, --passphrase <file>
+                read passphrase from file instead of the terminal
+                (only for LUKS encrypted devices)
+  -d, --debug : enable debug output (very verbose)
+  -h, --help  : print this help message and exit successfuly
+  -V, --version
+                print version number and exit successfully
